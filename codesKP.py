@@ -343,3 +343,82 @@ jump_search_examples()
 Найден элемент arr[10] = 55
 
 Элемент 55 найден на позиции 10
+
+# 5) Экспоненциальный поиск
+
+def exponential_search(arr, target):
+    """
+    Экспоненциальный поиск в отсортированном массиве
+    
+    Args:
+        arr: отсортированный список элементов
+        target: искомый элемент
+    
+    Returns:
+        индекс элемента или -1 если не найден
+    """
+    n = len(arr)
+    
+    # Если массив пустой
+    if n == 0:
+        return -1
+    
+    # Если искомый элемент - первый
+    if arr[0] == target:
+        return 0
+    
+    # Находим диапазон для бинарного поиска
+    i = 1
+    while i < n and arr[i] <= target:
+        i *= 2
+    
+    # Выполняем бинарный поиск в найденном диапазоне
+    left = i // 2
+    right = min(i, n - 1)
+    
+    return binary_search(arr, target, left, right)
+
+
+def binary_search(arr, target, left, right):
+    """
+    Вспомогательная функция бинарного поиска
+    """
+    while left <= right:
+        mid = left + (right - left) // 2
+        
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1
+
+
+# Пример использования
+if __name__ == "__main__":
+    # Тестовый массив
+    arr = [2, 3, 4, 10, 15, 18, 20, 22, 25, 30, 35, 40, 45, 50]
+    targets = [10, 25, 1, 55, 20]
+    
+    print("Массив:", arr)
+    print()
+    
+    for target in targets:
+        result = exponential_search(arr, target)
+        if result != -1:
+            print(f"Элемент {target} найден по индексу {result}")
+        else:
+            print(f"Элемент {target} не найден в массиве")
+
+# вывод кода по экспоненциальному поиску
+
+Массив: [2, 3, 4, 10, 15, 18, 20, 22, 25, 30, 35, 40, 45, 50]
+
+Элемент 10 найден по индексу 3
+Элемент 25 найден по индексу 8
+Элемент 1 не найден в массиве
+Элемент 55 не найден в массиве
+Элемент 20 найден по индексу 6
+
