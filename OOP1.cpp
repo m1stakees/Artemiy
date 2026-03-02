@@ -1,4 +1,4 @@
-main.cpp (консольный ввод)
+main.cpp
 cpp
 #include <iostream>
 #include <cmath>
@@ -6,9 +6,8 @@ cpp
 using namespace std;
 
 /*
- * Задание 22: Y = cos( || sin(π + √(B²/A)) / tan(∛A) || )
+ * Задание 22: Y = cos( || sin(pi + (B^2/A)^1/2) / tan(A^1/3) || )
  * A = 1.2, B = 1.4
- * Тема: Ввод-вывод данных в C++
  */
 
 int main() {
@@ -27,21 +26,21 @@ int main() {
         return 1;
     }
     
-    // Вычисление: √(B²/A)
+    // Вычисление: (B^2/A)^1/2
     double sqrt_term = sqrt(B * B / A);
     
-    // Кубический корень ∛A = A^(1/3)
+    // Кубический корень A^1/3 = A^(1/3)
     double cbrt_A = pow(A, 1.0 / 3.0);
     
-    // Числитель: sin(π + √(B²/A))
+    // Числитель: sin(pi + (B^2/A)^1/2)
     double numerator = sin(M_PI + sqrt_term);
     
-    // Знаменатель: tan(∛A)
+    // Знаменатель: tan(A^1/3)
     double denominator = tan(cbrt_A);
     
     // Проверка деления на ноль
     if (fabs(denominator) < 1e-10) {
-        cout << "Ошибка: тангенс(∛A) близок к нулю!" << endl;
+        cout << "Ошибка: тангенс(A^1/3) близок к нулю!" << endl;
         return 1;
     }
     
@@ -52,13 +51,27 @@ int main() {
     
     // Форматированный вывод (fixed, setprecision)
     cout << fixed << setprecision(10);
-    cout << "\nРезультат вычислений:\n";
+    cout << "\Результат вычислений:\";
     cout << "A = " << A << endl;
     cout << "B = " << B << endl;
-    cout << "∛A = " << cbrt_A << endl;
-    cout << "√(B²/A) = " << sqrt_term << endl;
+    cout << "A^1/3 = " << cbrt_A << endl;
+    cout << "(B^2/A)^1/2 = " << sqrt_term << endl;
     cout << "Y = " << Y << endl;
     
-    cout << "\nПрограмма выполнена успешно!" << endl;
+    cout << "\Программа выполнена успешно!" << endl;
     return 0;
 }
+
+
+=== Задание 22 ===
+Введите A: 1.2
+Введите B: 1.4
+
+Результат вычислений:
+A = 1.2000000000
+B = 1.4000000000
+∛A = 1.0626585692
+√(B²/A) = 1.0801234497
+Y = 0.8611761143
+
+Программа выполнена успешно!
